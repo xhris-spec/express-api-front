@@ -17,20 +17,19 @@
 import { ref, inject } from "vue";
 import { login } from "../api";
 
-const emit = defineEmits(["logged-in"]);
 const state = inject("state");
 const username = ref("admin");
 const password = ref("admin123");
 const error = ref("");
 
 async function submit() {
-  error.value = "";
+  error.value = "";                  
   try {
-    const { data } = await login(username.value, password.value);
-    state.token = data.access_token;
-    emit("logged-in", data.access_token);
+    const data = await login(username.value, password.value);
+    state.token = data.access_token;  
   } catch (e) {
     error.value = "Credenciales inválidas";
   }
 }
 </script>
+
