@@ -1,9 +1,16 @@
 import axios from "axios";
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000/api";
 
-let token = "";
+const api = axios.create({ baseURL: API_BASE });
+
+api.interceptors.request.use((config) => {
+  const t = localStorage.getItem("token");
+  if (t) config.headers.Authorization = `Bearer ${t}`;
+  return config;
+});
+
 export function setToken(t) {
-  token = t;
+  localStorage.setItem("token", t);
 }
 
 export async function login(username, password) {
