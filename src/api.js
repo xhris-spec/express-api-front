@@ -23,21 +23,11 @@ export async function login(username, password) {
 }
 
 export async function listItems() {
-  return axios.get(`${API_BASE}/items`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  return api.get(`/items`);
 }
-
 export async function createItem(data) {
-  return axios.post(`${API_BASE}/items`, data, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  return api.post(`/items`, data);
 }
-
 export async function semanticSearch(query, k = 5) {
-  return axios.post(
-    `${API_BASE}/search`,
-    { query, k },
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
+  return api.post(`/search`, { query, k });
 }
